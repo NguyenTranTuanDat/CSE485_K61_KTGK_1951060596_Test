@@ -10,9 +10,9 @@
     $sql = "INSERT INTO blood_donor(name, sex, age, bgroup, regdate, phone) VALUES('$name','$sex','$age','$bgroup','$regdate','$phone') ";
     $result = mysqli_query($conn,$sql);
     if(!$result){
-        echo $result;
-        // header('location: error.php');
+        header('location: error.php');
     }else{
         header('location: index.php');
-    }    
+    } 
+    mysqli_close();   
 ?>

@@ -1,5 +1,11 @@
 <?php
     require "config.php";
+    $id = $_GET['id'];
+    $sql = "SELECT * FROM blood_donor where id = '$id'";
+    $result = mysqli_query($conn,$sql);
+    if(mysqli_num_rows($result) > 0){
+        $row = mysqli_fetch_assoc($result);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +35,7 @@
                   Chi tiết
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="update.php">Sửa</a></li>
+                  <li><a class="dropdown-item" href="select.php">thêm</a></li>
                   <li>
                     <hr class="dropdown-divider">
                   </li>
@@ -47,30 +53,34 @@
   <body>
 
     <div class='container'>
-      <form action="process_select.php" method="post">
+      <form action="process_update.php" method="post">
+        <div class="mb-3">
+          <label for="id" class="form-label">ID</label>
+          <input type="text" class="form-control" readonly id="id" name="id" value = <?php echo $row['id'];?>>
+        </div>
         <div class="mb-3">
           <label for="name" class="form-label">Name</label>
-          <input type="text" class="form-control" id="name" name="name" placeholder="nhập họ tên đầy đủ">
+          <input type="text" class="form-control" id="name" name="name" value = <?php echo $row['name'];?>>
         </div>
         <div class="mb-3">
           <label for="sex" class="form-label">Sex</label>
-          <input type="text" class="form-control" id="sex" name="sex" placeholder="nhập giới tính">
+          <input type="text" class="form-control" id="sex" name="sex" value = <?php echo $row['sex'];?>>
         </div>
         <div class="mb-3">
           <label for="age" class="form-label">Age</label>
-          <input type="number" class="form-control" id="age" name="age" placeholder="nhập tuổi">
+          <input type="number" class="form-control" id="age" name="age" value = <?php echo $row['age'];?>>
         </div>
         <div class="mb-3">
           <label for="bgroup" class="form-label">Bgroup</label>
-          <input type="text" class="form-control" id="bgroup" name="bgroup" placeholder="nhập nhóm máu">
+          <input type="text" class="form-control" id="bgroup" name="bgroup" value = <?php echo $row['bgroup'];?>>
         </div>
         <div class="mb-3">
           <label for="regdate" class="form-label">Reg Date</label>
-          <input type="date" class="form-control" id="regdate" name="regdate" placeholder="nhập ngày tháng năm đi hiến máu">
+          <input type="date" class="form-control" id="regdate" name="regdate" value = <?php echo $row['regdate'];?>>
         </div>
         <div class="mb-3">
           <label for="phone" class="form-label">Phone</label>
-          <input type="Text" class="form-control" id="phone" name="phone" placeholder="nhập số điện thoại">
+          <input type="Text" class="form-control" id="phone" name="phone" value = <?php echo $row['phone'];?>>
         </div>  
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
